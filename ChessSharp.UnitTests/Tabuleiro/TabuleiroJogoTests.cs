@@ -33,25 +33,23 @@ public class TabuleiroJogoTests
         
         //Act
 
-        tab.ColocarPeca(new Peca(new Posicao(pecaPosX, pecaPosX), tab, Cor.Branca), new Posicao(pecaPosY, pecaPosY));
+        tab.ColocarPeca(new Peca(tab, Cor.Branca), new Posicao(pecaPosY, pecaPosY));
         
         var result = tab.ReturnPeca(pecaPosX, pecaPosY);
         
         //Assert
         result.Should().NotBeNull();
-        result.Should().BeEquivalentTo(new Peca(new Posicao(pecaPosX, pecaPosX), tab, Cor.Branca));
+        result.Should().BeEquivalentTo(new Peca(tab, Cor.Branca));
     }
 
-    [InlineData(2, 2, 0, 0)]
+    [InlineData(2, 2)]
     [Theory]
-    public void TabuleiroJogo_ReturnPeca_ShouldReturnPecaAndUpdatePecaPosition(int linha, int coluna, int pecaPosX,
-        int pecaPosY)
+    public void TabuleiroJogo_ReturnPeca_ShouldReturnPecaAndUpdatePecaPosition(int linha, int coluna)
     {
         //Arrange
         
         var tab = new TabuleiroJogo(linha, coluna);
-        var startPos = new Posicao(pecaPosX, pecaPosY);
-        var peca = new Peca(startPos, tab, Cor.Branca);
+        var peca = new Peca(tab, Cor.Branca);
         var newPos = new Posicao(1, 1);
         
         //Act
@@ -62,7 +60,6 @@ public class TabuleiroJogoTests
         
         //Assert
         result.Should().NotBeNull();
-        result.Should().BeEquivalentTo(new Peca(new Posicao(newPos.Linha, newPos.Coluna), tab, Cor.Branca));
         peca.Posicao.Linha.Should().Be(newPos.Linha);
         peca.Posicao.Coluna.Should().Be(newPos.Coluna);
     }
