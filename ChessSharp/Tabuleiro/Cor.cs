@@ -1,4 +1,4 @@
-﻿namespace Tabuleiro;
+﻿namespace ChessSharp.Tabuleiro;
 
 public enum Cor : int
 {

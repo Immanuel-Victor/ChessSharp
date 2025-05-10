@@ -1,5 +1,4 @@
-﻿namespace Tabuleiro;
-
+﻿namespace ChessSharp.Tabuleiro;
 public class Posicao
 {
     public int Linha { get; set; }
