@@ -7,9 +7,9 @@ public class Peca
     public int MovesMade { get; protected set; }
     public TabuleiroJogo TabuleiroJogo { get; protected set; }
 
-    public Peca(Posicao posicao, TabuleiroJogo tabuleiroJogo, Cor cor)
+    public Peca(TabuleiroJogo tabuleiroJogo, Cor cor)
     {
-        Posicao = posicao;
+        Posicao = null;
         Cor = cor;
         TabuleiroJogo = tabuleiroJogo;
         MovesMade = 0;
