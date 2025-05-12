@@ -1,4 +1,6 @@
-﻿namespace ChessSharp.Tabuleiro;
+﻿using ChessSharp.Tabuleiro.Exeptions;
+
+namespace ChessSharp.Tabuleiro;
 
 public class TabuleiroJogo
 {
@@ -18,9 +20,39 @@ public class TabuleiroJogo
         return _pecas[linha, coluna];
     }
 
+    public bool ExistePeca(Posicao pos)
+    {
+        ValidarPosicão(pos);
+        return _pecas[pos.Linha, pos.Coluna] != null;
+    }
+
     public void ColocarPeca(Peca p, Posicao pos)
     {
+        if (ExistePeca(pos))
+        {
+            throw new TabuleiroException("Já existe uma peça nessa posição");
+        }
         _pecas[pos.Linha, pos.Coluna] = p;
         p.Posicao = pos;
+    }
+
+    public bool PosicaoValida(Posicao pos)
+    {
+        if (pos.Linha < 0 || pos.Linha >= Linhas || pos.Coluna < 0 || pos.Coluna >= Colunas)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void ValidarPosicão(Posicao pos)
+    {
+        var validPosition = PosicaoValida(pos);
+
+        if (!validPosition)
+        {
+            throw new TabuleiroException("Posição inválida!");
+        }
     }
 }
