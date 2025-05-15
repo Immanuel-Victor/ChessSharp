@@ -22,12 +22,14 @@ public class TelaTests
         using var sw2 = new StringWriter();
         for (int i = 0; i < linhas; i++)
         {
+            sw2.Write((linhas - i) + " ");    
             for (int j = 0; j < colunas; j++)
             {
                 sw2.Write("- ");
             }
             sw2.WriteLine();
         }
+        sw2.Write("  a b c d e f g h");
         
         //Assert
         
