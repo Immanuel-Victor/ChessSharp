@@ -1,4 +1,5 @@
 ﻿using ChessSharp.Tabuleiro;
+using ChessSharp.Xadrez;
 
 namespace ChessSharp;
 
@@ -8,9 +9,11 @@ class Program
     {
 
         Posicao p = new Posicao(3, 4);
+        TabuleiroJogo tab = new TabuleiroJogo(8, 8);
+        tab.ColocarPeca(new Rei(tab, Cor.Preta), p);
         
-        Console.WriteLine($"Posição: {p}");
         
-        Tela.ImprimirTabuleiro(new TabuleiroJogo(8, 8));
+        
+        Tela.ImprimirTabuleiro(tab);
     }
 }
