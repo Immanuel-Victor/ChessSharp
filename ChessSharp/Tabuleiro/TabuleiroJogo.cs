@@ -15,9 +15,9 @@ public class TabuleiroJogo
         _pecas = new Peca[linhas, colunas];
     }
 
-    public Peca? ReturnPeca(int linha, int coluna)
+    public Peca? ReturnPeca(Posicao pos)
     {
-        return _pecas[linha, coluna];
+        return _pecas[pos.Linha, pos.Coluna];
     }
 
     public bool ExistePeca(Posicao pos)
@@ -34,6 +34,19 @@ public class TabuleiroJogo
         }
         _pecas[pos.Linha, pos.Coluna] = p;
         p.Posicao = pos;
+    }
+
+    public Peca? RetirarPeca(Posicao pos)
+    {
+        Peca? aux = ReturnPeca(pos);
+        if (aux == null)
+        {
+            return null;
+        }
+
+        aux.Posicao = null;
+        _pecas[pos.Linha, pos.Coluna] = null;
+        return aux;
     }
 
     public bool PosicaoValida(Posicao pos)
