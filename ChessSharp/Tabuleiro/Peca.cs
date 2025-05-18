@@ -26,5 +26,26 @@ public abstract class Peca
         MovesMade++;
     }
 
+    public bool MovimentosDisponiveis()
+    {
+        bool[,] mat = MovimentosPossiveis();
+        for (int i = 0; i < TabuleiroJogo.Linhas; i++)
+        {
+            for (int j = 0; j < TabuleiroJogo.Colunas; j++)
+            {
+                if (mat[i, j] == true)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public bool MovimentoPermitido(Posicao destino)
+    {
+        return MovimentosPossiveis()[destino.Linha, destino.Coluna];
+    }
+
     public abstract bool[,] MovimentosPossiveis();
 }
