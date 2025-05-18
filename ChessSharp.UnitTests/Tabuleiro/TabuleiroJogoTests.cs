@@ -20,10 +20,11 @@ public class TabuleiroJogoTests
         //Arrange
         
         var tab = new TabuleiroJogo(linha, coluna);
+        var pos = new Posicao(pecaPosY, pecaPosY);
         
         //Act
         
-        var result = tab.ReturnPeca(pecaPosX, pecaPosY);
+        var result = tab.ReturnPeca(pos);
         
         //Assert
         
@@ -38,12 +39,13 @@ public class TabuleiroJogoTests
         //Arrange
         
         var tab = new TabuleiroJogo(linha, coluna);
+        var pos = new Posicao(pecaPosY, pecaPosY);
         
         //Act
 
-        tab.ColocarPeca(new Peca(tab, Cor.Branca), new Posicao(pecaPosY, pecaPosY));
+        tab.ColocarPeca(new Peca(tab, Cor.Branca), pos);
         
-        var result = tab.ReturnPeca(pecaPosX, pecaPosY);
+        var result = tab.ReturnPeca(pos);
         
         //Assert
         result.Should().NotBeNull();
@@ -64,7 +66,7 @@ public class TabuleiroJogoTests
 
         tab.ColocarPeca(peca, newPos);
         
-        var result = tab.ReturnPeca(newPos.Linha, newPos.Coluna);
+        var result = tab.ReturnPeca(newPos);
         
         //Assert
         result.Should().NotBeNull();

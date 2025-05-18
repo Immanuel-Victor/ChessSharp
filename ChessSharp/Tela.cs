@@ -39,6 +39,48 @@ public class Tela
         Console.WriteLine("  a b c d e f g h");
     }
 
+    public static void ImprimirPartida(PartidaXadrez partida)
+    {
+        ImprimirTabuleiro(partida.Tabuleiro);
+        Console.WriteLine();
+        ImprimirPecasCapturadas(partida);
+        Console.WriteLine();
+        Console.WriteLine("Turno: " + partida.Turno);
+        if (!partida.Terminada)
+        {
+            Console.WriteLine("Aguardando jogada da cor: " + partida.JogadorAtual);
+            if (partida.Xeque)
+            {
+                Console.WriteLine("Você está em Cheque");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Xeque Mate");
+            Console.WriteLine($"Vencedor: ${partida.JogadorAtual}");
+        }
+
+    }
+
+    public static void ImprimirPecasCapturadas(PartidaXadrez partida)
+    {
+        Console.WriteLine("Peças Capturadas: ");
+        Console.Write("Brancas ");
+        ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
+        Console.Write("Pretas: ");
+        ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
+    }
+
+    public static void ImprimirConjunto(HashSet<Peca> pecas)
+    {
+        Console.Write("[");
+        foreach (Peca p in pecas)
+        {
+            Console.Write(p + " ");
+        }
+        Console.WriteLine("]");
+    }
+
     public static void ImprimirPeca(Peca peca)
     {
         if (peca == null)

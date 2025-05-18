@@ -25,6 +25,10 @@ public abstract class Peca
     {
         MovesMade++;
     }
+    public void DecrementarMovimentos()
+    {
+        MovesMade--;
+    }
 
     public bool MovimentosDisponiveis()
     {
