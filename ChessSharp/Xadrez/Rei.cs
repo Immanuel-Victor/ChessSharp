@@ -3,13 +3,21 @@ using Tabuleiro;
 
 public class Rei : Peca
 {
-    public Rei(TabuleiroJogo tabuleiroJogo, Cor cor) : base(tabuleiroJogo, cor)
+    private PartidaXadrez _partida;
+    public Rei(TabuleiroJogo tabuleiroJogo, Cor cor, PartidaXadrez partida) : base(tabuleiroJogo, cor)
     {
+        _partida = partida;
     }
 
     public override string ToString()
     {
         return "R";
+    }
+
+    private bool TesteTorreRoque(Posicao pos)
+    {
+        Peca p = TabuleiroJogo.ReturnPeca(pos);
+        return p != null && p.Cor != Cor && p is Torre && p.Cor == Cor && p.MovesMade == 0;
     }
 
     public override bool[,] MovimentosPossiveis()
@@ -67,6 +75,37 @@ public class Rei : Peca
              matrizMov[current.Linha, current.Coluna] = true;
          }
         
-        return matrizMov;
+         //Roque Pequeno
+         if (MovesMade == 0 && !_partida.Xeque)
+         {
+             Posicao posT1 = new Posicao(Posicao.Linha, Posicao.Coluna + 3);
+             if (TesteTorreRoque(posT1))
+             {
+                 Posicao p1 = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
+                 Posicao p2 = new Posicao(Posicao.Linha, Posicao.Coluna + 2);
+                 if (TabuleiroJogo.ReturnPeca(p1) == null && TabuleiroJogo.ReturnPeca(p2) == null)
+                 {
+                     matrizMov[Posicao.Linha, Posicao.Coluna + 2] = true;
+                 }
+             }
+         }
+         
+         //Roque Grande
+         if (MovesMade != 0 || _partida.Xeque) return matrizMov;
+         {
+             Posicao posT2 = new Posicao(Posicao.Linha, Posicao.Coluna - 4);
+             if (TesteTorreRoque(posT2))
+             {
+                 Posicao p1 = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
+                 Posicao p2 = new Posicao(Posicao.Linha, Posicao.Coluna - 2);
+                 Posicao p3 = new Posicao(Posicao.Linha, Posicao.Coluna - 3);
+                 if (TabuleiroJogo.ReturnPeca(p1) == null && TabuleiroJogo.ReturnPeca(p2) == null && TabuleiroJogo.ReturnPeca(p3) == null) 
+                 {
+                     matrizMov[Posicao.Linha, Posicao.Coluna + 2] = true;
+                 }
+             }
+         }
+
+         return matrizMov;
     }
 }

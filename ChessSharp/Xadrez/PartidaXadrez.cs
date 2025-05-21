@@ -34,6 +34,26 @@ public class PartidaXadrez
         {
             _capturadas.Add(pecaCapturada);
         }
+        
+        // Jogada Especial - Roque Pequeno
+        if (p is Rei && destino.Coluna == origem.Coluna + 2)
+        {
+            Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+            Posicao destinoT = new Posicao(destino.Linha, destino.Coluna + 1);
+            Peca T = Tabuleiro.RetirarPeca(origemT);
+            T.IncrementarMovimentos();
+            Tabuleiro.ColocarPeca(T, destinoT);
+        }
+        
+        // Jogada Especial - Roque Grande
+        if (p is Rei && destino.Coluna == origem.Coluna - 2)
+        {
+            Posicao origemT = new Posicao(origem.Linha, origem.Coluna - 4);
+            Posicao destinoT = new Posicao(destino.Linha, destino.Coluna - 1);
+            Peca T = Tabuleiro.RetirarPeca(origemT);
+            T.IncrementarMovimentos();
+            Tabuleiro.ColocarPeca(T, destinoT);
+        }
 
         return pecaCapturada;
     }
@@ -68,6 +88,26 @@ public class PartidaXadrez
             _capturadas.Remove(pecaCapturada);
         }
         Tabuleiro.ColocarPeca(p, origem);
+        
+        // Jogada Especial - Roque Pequeno
+        if (p is Rei && destino.Coluna == origem.Coluna + 2)
+        {
+            Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+            Posicao destinoT = new Posicao(destino.Linha, destino.Coluna + 1);
+            Peca T = Tabuleiro.RetirarPeca(origemT);
+            T.DecrementarMovimentos();
+            Tabuleiro.ColocarPeca(T, destinoT);
+        }
+        
+        // Jogada Especial - Roque Grande
+        if (p is Rei && destino.Coluna == origem.Coluna - 2)
+        {
+            Posicao origemT = new Posicao(origem.Linha, origem.Coluna - 4);
+            Posicao destinoT = new Posicao(destino.Linha, destino.Coluna - 1);
+            Peca T = Tabuleiro.RetirarPeca(origemT);
+            T.DecrementarMovimentos();
+            Tabuleiro.ColocarPeca(T, destinoT);
+        }
     }
 
     public void ValidarOrigem(Posicao origem)
@@ -218,7 +258,7 @@ public class PartidaXadrez
         ColocarNovaPeca(new PosicaoXadrez('b', 1), new Cavalo(Tabuleiro, Cor.Branca));
         ColocarNovaPeca(new PosicaoXadrez('c', 1), new Bispo(Tabuleiro, Cor.Branca));
         ColocarNovaPeca(new PosicaoXadrez('d', 1), new Dama(Tabuleiro, Cor.Branca));
-        ColocarNovaPeca(new PosicaoXadrez('e', 1), new Rei(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('e', 1), new Rei(Tabuleiro, Cor.Branca, this));
         ColocarNovaPeca(new PosicaoXadrez('f', 1), new Bispo(Tabuleiro, Cor.Branca));
         ColocarNovaPeca(new PosicaoXadrez('g', 1), new Cavalo(Tabuleiro, Cor.Branca));
         ColocarNovaPeca(new PosicaoXadrez('h', 1), new Torre(Tabuleiro, Cor.Branca));
@@ -236,7 +276,7 @@ public class PartidaXadrez
         ColocarNovaPeca(new PosicaoXadrez('b', 8), new Cavalo(Tabuleiro, Cor.Preta));
         ColocarNovaPeca(new PosicaoXadrez('c', 8), new Bispo(Tabuleiro, Cor.Preta));
         ColocarNovaPeca(new PosicaoXadrez('d', 8), new Dama(Tabuleiro, Cor.Preta));
-        ColocarNovaPeca(new PosicaoXadrez('e', 8), new Rei(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('e', 8), new Rei(Tabuleiro, Cor.Preta, this));
         ColocarNovaPeca(new PosicaoXadrez('f', 8), new Bispo(Tabuleiro, Cor.Preta));
         ColocarNovaPeca(new PosicaoXadrez('g', 8), new Cavalo(Tabuleiro, Cor.Preta));
         ColocarNovaPeca(new PosicaoXadrez('h', 8), new Torre(Tabuleiro, Cor.Preta));
