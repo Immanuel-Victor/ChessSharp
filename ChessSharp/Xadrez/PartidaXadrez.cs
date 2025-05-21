@@ -104,7 +104,7 @@ public class PartidaXadrez
     public HashSet<Peca> PecasEmJogo(Cor cor)
     {
         HashSet<Peca> aux = new HashSet<Peca>();
-        foreach (Peca p in _capturadas)
+        foreach (Peca p in _pecas)
         {
             if (p.Cor == cor)
             {
@@ -205,7 +205,41 @@ public class PartidaXadrez
 
     public void ColocarPecas()
     {
-        ColocarNovaPeca(new PosicaoXadrez('c', 1), new Torre(Tabuleiro, Cor.Preta));
+        //Initialize White Board
+        ColocarNovaPeca(new PosicaoXadrez('a', 2), new Peao(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('b', 2), new Peao(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('c', 2), new Peao(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('d', 2), new Peao(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('e', 2), new Peao(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('f', 2), new Peao(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('g', 2), new Peao(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('h', 2), new Peao(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('a', 1), new Torre(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('b', 1), new Cavalo(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('c', 1), new Bispo(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('d', 1), new Dama(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('e', 1), new Rei(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('f', 1), new Bispo(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('g', 1), new Cavalo(Tabuleiro, Cor.Branca));
+        ColocarNovaPeca(new PosicaoXadrez('h', 1), new Torre(Tabuleiro, Cor.Branca));
+        
+        //Initialize Black Board
+        ColocarNovaPeca(new PosicaoXadrez('a', 7), new Peao(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('b', 7), new Peao(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('c', 7), new Peao(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('d', 7), new Peao(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('e', 7), new Peao(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('f', 7), new Peao(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('g', 7), new Peao(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('h', 7), new Peao(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('a', 8), new Torre(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('b', 8), new Cavalo(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('c', 8), new Bispo(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('d', 8), new Dama(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('e', 8), new Rei(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('f', 8), new Bispo(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('g', 8), new Cavalo(Tabuleiro, Cor.Preta));
+        ColocarNovaPeca(new PosicaoXadrez('h', 8), new Torre(Tabuleiro, Cor.Preta));
     }
 
     public void ColocarNovaPeca(PosicaoXadrez posicaoPeca, Peca peca)

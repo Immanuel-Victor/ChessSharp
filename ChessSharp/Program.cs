@@ -25,14 +25,12 @@ class Program
             
                 Console.Clear();
                 Tela.ImprimirTabuleiro(partida.Tabuleiro, posicoesPossiveis);
-            
-            
-            
+                
                 Console.Write("Destino: ");
                 Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
                 partida.ValidarDestino(origem, destino);
             
-                partida.RealizaJogada(origem, destino );
+                partida.RealizaJogada(origem, destino);
             }
             catch (Exception e)
             {
