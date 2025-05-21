@@ -4,8 +4,10 @@ namespace ChessSharp.Xadrez;
 
 public class Peao : Peca
 {
-    public Peao(TabuleiroJogo tabuleiroJogo, Cor cor) : base(tabuleiroJogo, cor)
+    private PartidaXadrez _partida;
+    public Peao(TabuleiroJogo tabuleiroJogo, Cor cor, PartidaXadrez partida) : base(tabuleiroJogo, cor)
     {
+        _partida = partida;
     }
 
     public override string ToString()
@@ -50,6 +52,20 @@ public class Peao : Peca
             {
                 matrizMov[current.Linha, current.Coluna] = true;
             }  
+            // En Passant
+            if (Posicao.Linha == 3)
+            {
+                Posicao esquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
+                if (TabuleiroJogo.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && TabuleiroJogo.ReturnPeca(esquerda) == _partida.VulneravelEnPassant)
+                {
+                    matrizMov[esquerda.Linha - 1, esquerda.Coluna] = true;
+                }                
+                Posicao direita = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
+                if (TabuleiroJogo.PosicaoValida(direita) && ExisteInimigo(direita) && TabuleiroJogo.ReturnPeca(direita) == _partida.VulneravelEnPassant)
+                {
+                    matrizMov[direita.Linha - 1 , direita.Coluna] = true;
+                }
+            }
         }
         else
         {
@@ -73,6 +89,20 @@ public class Peao : Peca
             {
                 matrizMov[current.Linha, current.Coluna] = true;
             }  
+            // En Passant
+            if (Posicao.Linha == 4)
+            {
+                Posicao esquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
+                if (TabuleiroJogo.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && TabuleiroJogo.ReturnPeca(esquerda) == _partida.VulneravelEnPassant)
+                {
+                    matrizMov[esquerda.Linha + 1, esquerda.Coluna] = true;
+                }                
+                Posicao direita = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
+                if (TabuleiroJogo.PosicaoValida(direita) && ExisteInimigo(direita) && TabuleiroJogo.ReturnPeca(direita) == _partida.VulneravelEnPassant)
+                {
+                    matrizMov[direita.Linha + 1, direita.Coluna] = true;
+                }
+            }
         }
 
         return matrizMov;
