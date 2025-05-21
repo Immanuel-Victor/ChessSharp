@@ -61,13 +61,29 @@ public class PartidaXadrez
     
     public void RealizaJogada(Posicao origem, Posicao destino)
     {
+        
         Peca pecaCapturada = ExecutarMovimento(origem, destino);
+        Peca p = Tabuleiro.ReturnPeca(destino);
         if (EmCheque(JogadorAtual))
         {
             DesfazMovimento(origem, destino, pecaCapturada);
             throw new TabuleiroException("Voce não pode se Colocar em cheque");
         }
+        
+        //Promoção
 
+        if (p is Peao)
+        {
+            if ((p.Cor == Cor.Branca && destino.Linha == 0) || (p.Cor == Cor.Preta && destino.Linha == 7))
+            {
+                p = Tabuleiro.RetirarPeca(destino);
+                _pecas.Remove(p);
+                Peca dama = new Dama(Tabuleiro, p.Cor);
+                Tabuleiro.ColocarPeca(dama, destino);
+                _pecas.Add(dama);
+            }
+        }
+        
         Xeque = EmCheque(Adversario(JogadorAtual));
 
         if (XequeMate(Adversario(JogadorAtual)))
@@ -80,7 +96,6 @@ public class PartidaXadrez
             MudaJogador();
         }
         //En passant
-        Peca p = Tabuleiro.ReturnPeca(destino);
         if (p is Peao && (destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2))
         {
             VulneravelEnPassant = p;
